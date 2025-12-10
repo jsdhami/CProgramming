@@ -1,0 +1,41 @@
+# Ignore object files and executables
+*.o
+*.out
+*.exe
+
+# Ignore compiled dynamic libraries
+*.so
+*.dylib
+*.dll
+
+# Ignore precompiled headers
+*.gch
+*.pch
+
+# Ignore static libraries
+*.a
+*.lib
+
+# Ignore debug files
+*.dSYM/
+*.d/
+
+# Ignore temporary files
+*.tmp
+*.temp
+
+# Ignore backup files
+*.bak
+*.swp
+
+# Ignore generated files
+*.gen.c
+*.gen.h
+
+# Ignore build directories
+/build/
+/dist/
+/bin/
+/obj/
+/Debug/
+/Release/
