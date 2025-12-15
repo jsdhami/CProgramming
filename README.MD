@@ -5,7 +5,7 @@
 
 **Compile:**
 ```cmd
-gcc filename.c -o filename.exe
+gcc 7.c -o filename.exe
 ```
 
 **Run:**
@@ -15,7 +15,7 @@ filename.exe
 
 **Compile and Run (combined):**
 ```cmd
-gcc filename.c -o filename.exe && filename.exe
+gcc 7.c -o filename.exe && filename.exe
 ```
 
 ## Alternative (using MinGW or MSVC)
