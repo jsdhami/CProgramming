@@ -43,6 +43,9 @@ int main() {
         }
     }
 
+
+
+    
     if (isPrime)
         printf("%d is a prime number.\n", num);
     else

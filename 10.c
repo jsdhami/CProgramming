@@ -2,50 +2,49 @@
  * Algorithm (high level):
  * 1. Start
  * 2. Prompt user for a decimal number
- * 3. Read the number (double)
- * 4. Convert to fraction:
- *        - Multiply by a power of 10 (here 1,000,000) to shift decimals
- *        - Round to nearest integer to form numerator
- *        - Denominator is the same power of 10
- *        - Reduce numerator/denominator by their GCD
- * 5. Display the simplified fraction
+ * 3. Read the number (integer)
+ * 4. Convert to hexadecimal:
+ *        - Repeatedly divide by 16
+ *        - Keep track of remainders
+ *        - Map remainders to hex digits (0-9, A-F)
+ * 5. Display the hexadecimal equivalent
  * 6. Stop
  */
 
 #include <stdio.h>
-
-long long gcd_ll(long long a, long long b) {
-	if (a < 0)
-		a = -a;
-	if (b < 0)
-		b = -b;
-
-	while (b != 0) {
-		long long temp = b;
-		b = a % b;
-		a = temp;
-	}
-	return a == 0 ? 1 : a;
-}
-
 int main() {
 	printf("Compiled on %s at %s\n", __DATE__, __TIME__);
 
-	double num;
-	const long long scale = 1000000LL; // precision: up to 6 decimal places
+	long long num;
+	char hex[100];
+	int i = 0;
 
 	printf("Enter a decimal number: ");
-	scanf("%lf", &num);
+	scanf("%lld", &num);
 
-	// Form numerator with rounding to nearest integer
-	long long numerator = (long long)(num * scale + (num >= 0 ? 0.5 : -0.5));
-	long long denominator = scale;
+	if (num == 0) {
+		printf("Hexadecimal: 0\n");
+		return 0;
+	}
 
-	long long g = gcd_ll(numerator, denominator);
-	numerator /= g;
-	denominator /= g;
+	long long temp = num;
+	while (temp > 0) {
+		long long remainder = temp % 16;
+		if (remainder < 10)
+			hex[i++] = remainder + '0';
+		else
+			hex[i++] = remainder - 10 + 'A';
+		temp /= 16;
+	}
 
-	printf("Fraction: %lld/%lld\n", numerator, denominator);
+	hex[i] = '\0';
+	for (int j = 0; j < i / 2; j++) {
+		char c = hex[j];
+		hex[j] = hex[i - 1 - j];
+		hex[i - 1 - j] = c;
+	}
+
+	printf("Hexadecimal: %s\n", hex);
 
 	return 0;
 }
